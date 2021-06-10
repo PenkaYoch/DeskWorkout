@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="blue_light">#6b8abc</color>
+    <color name="blue_dark">#163d7b</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+
+    <!-- Font Colors-->
+    <color name="fontBlack">#000000</color>
+    <color name="fontWhite">#FFFFFF</color>
+    <color name="fontBlue">#2D3A7C</color>
+    <color name="fontBlue2">#3f51b5</color>
+    <color name="fontBlueUnselected">#6C75A3</color>
+    <color name="fontGrey1">#606060</color>
+    <color name="fontGrey2">#8F8F8F</color>
+    <color name="fontGrey3">#9E9E9E</color>
+    <color name="fontGrey4">#D9D9D9</color>
+    <color name="fontGrey5">#F0F0F0</color>
+    <color name="fontRed">#DA0000</color>
+    <color name="fontRed2">#E8484F</color>
+    <color name="fontGreen">#48E866</color>
+
+    <!-- Shadow Colors-->
+    <color name="tabBarBackgroundColor">#ffffff</color>
+    <color name="tabBarShadowColor">#ff000000</color>
+    <color name="fontGreyTransparent">#ffD9D9D9</color>
 </resources>

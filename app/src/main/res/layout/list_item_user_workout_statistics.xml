@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item_user_workout_statistics">
+
+    <LinearLayout
+        android:id="@+id/userWorkoutLayout"
+        style="@style/ButtonBlueOval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_half"
+            android:textSize="@dimen/title_h2"
+            android:textColor="@color/blue_dark"
+            android:text="@string/user_statistics" />
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginStart="@dimen/margin_normal"-->
+<!--            android:layout_marginTop="@dimen/margin_small"-->
+<!--            android:textSize="@dimen/title_h4"-->
+<!--            android:textColor="@color/blue_light"-->
+<!--            android:text="@string/benefits_of_desk_workout_subtitle" />-->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/margin_half"
+            android:src="@drawable/ic_fitness_statistics" />
+    </LinearLayout>
+
+</LinearLayout>
