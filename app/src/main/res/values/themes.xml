@@ -22,4 +22,9 @@
     <style name="Theme.StandingDeskWorkout.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.StandingDeskWorkout.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.StandingDeskWorkout.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

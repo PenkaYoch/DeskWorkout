@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import bg.deskworkout.deskworkout.R
 import bg.deskworkout.deskworkout.databinding.FragmentHomeBinding
 import bg.deskworkout.deskworkout.factory.HomeViewModelFactory
+import bg.deskworkout.deskworkout.ui.workoutBenefits.DeskWorkoutBenefits
 import bg.deskworkout.deskworkout.ui.workoutRoutine.WorkoutRoutineFragment
 import bg.deskworkout.deskworkout.utils.Alerts
 import bg.deskworkout.deskworkout.utils.navigate
@@ -21,24 +22,13 @@ class HomeFragment : Fragment(), HomeRecyclerViewAdapter.OnRecyclerViewItemClick
     val homeViewModel: HomeViewModel by viewModels { HomeViewModelFactory(requireContext()) }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-        //inflater.inflate(R.layout.fragment_home, container, false)
     }
-//    {
-//        homeViewModel =
-//                ViewModelProvider(this).get(HomeViewModel::class.java)
-//        val root = inflater.inflate(R.layout.fragment_home, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_home)
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-//        return root
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,10 +38,26 @@ class HomeFragment : Fragment(), HomeRecyclerViewAdapter.OnRecyclerViewItemClick
     }
 
     override fun onRecyclerViewListItemClicked(position: Int) {
-        findNavController().navigate(R.id.nav_workout_exercises,
-        WorkoutRoutineFragment::class,
-        null,
-        slideNavigationOptions())
-        //Alerts.showDefaultAlert(requireContext(), "Show", "Show $position")
+        when(position) {
+            0 -> {
+                findNavController().navigate(
+                    R.id.nav_workout_exercises,
+                    WorkoutRoutineFragment::class,
+                    null,
+                    slideNavigationOptions()
+                )
+            }
+            1 -> {
+                findNavController().navigate(
+                    R.id.deskWorkoutBenefits,
+                    DeskWorkoutBenefits::class,
+                    null,
+                    slideNavigationOptions()
+                )
+            }
+            2 -> {
+                Alerts.showDefaultAlert(requireContext(), "Info", "Coming soon!")
+            }
+        }
     }
 }

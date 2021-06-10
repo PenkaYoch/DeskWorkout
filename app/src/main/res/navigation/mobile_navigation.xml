@@ -12,15 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="bg.deskworkout.deskworkout.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_feedback"
+        android:name="bg.deskworkout.deskworkout.ui.gallery.FeedbackFragment"
+        android:label="@string/menu_feedback"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="bg.deskworkout.deskworkout.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_settings"
+        android:name="bg.deskworkout.deskworkout.ui.slideshow.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/createWorkoutFragment"
+        android:name="bg.deskworkout.deskworkout.ui.createWorkout.CreateWorkoutFragment"
+        android:label="@string/create_workout"
+        tools:layout="@layout/fragment_create_workout" />
     <include app:graph="@navigation/nav_workout_exercises"/>
 </navigation>

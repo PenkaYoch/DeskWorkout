@@ -8,6 +8,16 @@
     <fragment
         android:id="@+id/workoutRoutineFragment"
         android:name="bg.deskworkout.deskworkout.ui.workoutRoutine.WorkoutRoutineFragment"
-        android:label="WorkoutRoutineFragment"
+        android:label="@string/workouts_title"
         tools:layout="@layout/fragment_workout_routine_list"/>
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="bg.deskworkout.deskworkout.ui.exercises.ExercisesFragment"
+        android:label="@string/workout_exercises"
+        tools:layout="@layout/fragment_exercises" />
+    <fragment
+        android:id="@+id/deskWorkoutBenefits"
+        android:name="bg.deskworkout.deskworkout.ui.workoutBenefits.DeskWorkoutBenefits"
+        android:label="desk_workout_benefits_fragment"
+        tools:layout="@layout/desk_workout_benefits_fragment" />
 </navigation>

@@ -1,72 +1,94 @@
 package bg.deskworkout.deskworkout.ui.workoutRoutine
 
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
-import android.preference.PreferenceManager
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import bg.deskworkout.deskworkout.DeskWorkoutApplication
 import bg.deskworkout.deskworkout.R
-import bg.deskworkout.deskworkout.ui.workoutRoutine.dummy.DummyContent
+import bg.deskworkout.deskworkout.databinding.FragmentWorkoutRoutineListBinding
+import bg.deskworkout.deskworkout.ui.common.NotificationTimeDialog
+import bg.deskworkout.deskworkout.ui.exercises.ExercisesFragment
+import bg.deskworkout.deskworkout.ui.notifications.NotificationService
+import bg.deskworkout.deskworkout.ui.notifications.UserNotification
+import bg.deskworkout.deskworkout.utils.NotificationUtils
+import bg.deskworkout.deskworkout.utils.UserSharedPreferences
+import bg.deskworkout.deskworkout.utils.navigate
+import bg.deskworkout.deskworkout.utils.slideNavigationOptions
+import java.util.*
+
 
 /**
  * A fragment representing a list of Items.
  */
-class WorkoutRoutineFragment : Fragment() {
+class WorkoutRoutineFragment : Fragment(), WorkoutRoutineRecyclerViewAdapter.OnRecyclerViewItemClickedListener {
 
-    private var columnCount = 1
+    private lateinit var binding: FragmentWorkoutRoutineListBinding
+    private val viewModel by lazy { ViewModelProvider(this).get(WorkoutRoutineViewModel::class.java) }
+    private val mAdapter = WorkoutRoutineRecyclerViewAdapter(null, this)
+
+    private var cursor: Cursor? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_workout_routine_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = WorkoutRoutineRecyclerViewAdapter(DummyContent.ITEMS)
+        viewModel.cursor.observe(this, { cursor: Cursor ->
+            if (cursor.count == 0) {
+                viewModel.fillDatabaseWithDefaultWorkouts()
+            } else {
+                mAdapter.swapCursor(cursor)?.close()
             }
+        })
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentWorkoutRoutineListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.workoutListRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.workoutListRecyclerView.adapter = mAdapter
+        binding.timeButton.setOnClickListener {
+            showTimePickerDialog()
         }
-        return view
     }
 
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-                WorkoutRoutineFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
-                }
+    override fun onDestroy() {
+        super.onDestroy()
+        cursor?.close()
     }
 
-//    private fun saveValues(){
-//
-////        val isChecked = binding.settingsDialogNotificationSwitch.isChecked
-//        with(PreferenceManager.getDefaultSharedPreferences(context).edit()){
-//            if (isNotifyActive != isChecked ){
-//                putBoolean(NOTIFICATION_ALLOW_TEXT,isChecked)
-//            }
-//            apply()
-//        }
-//    }
+    private fun showTimePickerDialog() {//v: View)
+        NotificationTimeDialog().show(parentFragmentManager, "timePicker")
+    }
+
+    override fun onRecyclerViewListItemClicked(position: Int) {
+        findNavController().navigate(
+            R.id.exercisesFragment,
+            ExercisesFragment::class,
+            null,
+            slideNavigationOptions()
+        )
+    }
+
 }

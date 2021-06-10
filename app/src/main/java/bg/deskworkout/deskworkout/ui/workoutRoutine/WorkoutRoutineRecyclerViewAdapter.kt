@@ -1,42 +1,86 @@
 package bg.deskworkout.deskworkout.ui.workoutRoutine
 
+import android.database.Cursor
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import bg.deskworkout.deskworkout.R
-
-import bg.deskworkout.deskworkout.ui.workoutRoutine.dummy.DummyContent.DummyItem
+import bg.deskworkout.deskworkout.database.WorkoutDB
+import bg.deskworkout.deskworkout.databinding.ListItemWorkoutBinding
+import bg.deskworkout.deskworkout.model.Workout
+import bg.deskworkout.deskworkout.ui.home.HomeRecyclerViewAdapter
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class WorkoutRoutineRecyclerViewAdapter(
-        private val values: List<DummyItem>)
-    : RecyclerView.Adapter<WorkoutRoutineRecyclerViewAdapter.ViewHolder>() {
+    private var cursor: Cursor?, private val listener: OnRecyclerViewItemClickedListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_workout_exercise, parent, false)
-        return ViewHolder(view)
+    interface OnRecyclerViewItemClickedListener {
+        fun onRecyclerViewListItemClicked(position: Int)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val holder = ListItemWorkoutBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return WorkoutViewHolder(holder)
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val cursor = cursor
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+        if (cursor != null && cursor.count != 0) {
+            if (!cursor.moveToPosition(position)) {
+                throw IllegalStateException("Couldn't move cursor to position $position")
+            }
+            val item = Workout(
+                cursor.getString(cursor.getColumnIndex(WorkoutDB.Columns.NAME)),
+                cursor.getString(cursor.getColumnIndex(WorkoutDB.Columns.IMAGE_NAME)),
+                cursor.getString(cursor.getColumnIndex(WorkoutDB.Columns.DESCRIPTION)),
+                cursor.getString(cursor.getColumnIndex(WorkoutDB.Columns.TYPE)),
+                cursor.getInt(cursor.getColumnIndex(WorkoutDB.Columns.DO_TIMES))
+            )
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            val workoutView = (holder as WorkoutViewHolder).workoutViewHolder
+            workoutView.workoutRoutineLayout.setOnClickListener {
+                listener.onRecyclerViewListItemClicked(position)
+            }
+            workoutView.workoutName.text = item.name
+            workoutView.workoutDescription.text = item.description
+            workoutView.workoutNumberTextView.text =
+                cursor.getString(cursor.getColumnIndex(WorkoutDB.Columns.ID))
         }
+    }
+
+    override fun getItemCount(): Int = cursor?.count ?: 0//values?.size ?: 0
+
+    inner class WorkoutViewHolder(val workoutViewHolder: ListItemWorkoutBinding) :
+        RecyclerView.ViewHolder(workoutViewHolder.root)
+
+
+    /**Следващата функция, е подхода, който съм избрал за актуализиране на данните в контейнера
+     * и съответното им представяне на потребителя
+     */
+    fun swapCursor(newCursor: Cursor?): Cursor? {
+        if (newCursor === cursor) {
+            return null
+        }
+        val numItems = itemCount
+        val oldCursor = cursor
+        cursor = newCursor
+        if (newCursor != null) {
+            notifyDataSetChanged()
+        } else {
+            notifyItemRangeRemoved(0, numItems)
+        }
+
+        return oldCursor
     }
 }

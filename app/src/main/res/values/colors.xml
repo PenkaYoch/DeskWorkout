@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="blue_light">#FF6200EE</color>
-    <color name="blue_dark">#FF3700B3</color>
+    <color name="blue_light">#6b8abc</color>
+    <color name="blue_dark">#163d7b</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
@@ -29,49 +29,8 @@
     <color name="fontRed2">#E8484F</color>
     <color name="fontGreen">#48E866</color>
 
-    <!-- Account Card Colors from iOS -->
-    <color name="colorTernaryCard">#616161</color>
-    <color name="colorPrimaryCard">#2C3973</color>
-    <color name="secondaryTextViewColor">#262626</color>
-
-    <color name="fontGold">#B97A19</color>
-    <color name="fontGreyCard">#41464D</color>
-    <color name="fonBlue">#0000ff</color>
-
-    <!-- Accent Colors-->
-    <color name="accentBlueDark">#2D3A7C</color>
-    <color name="accentBlueDarkUnselected">#6C75A3</color>
-    <color name="transparentAccentBlueDark">#262D3A7C</color>
-    <color name="accentBlue">#43A4DB</color>
-    <color name="accentBlueUnselected">#8EC8E9</color>
-    <color name="transparentAccentBlue">#2643A4DB</color>
-    <color name="accentOrange">#F7975F</color>
-    <color name="accentOrangeUnselected">#F8AB7E</color>
-    <color name="transparentAccentOrange">#26F7975F</color>
-    <color name="accentOrangeDark">#CB582F</color>
-    <color name="transparentAccentOrangeDark">#26CB582F</color>
-    <color name="accentGray">#606060</color>
-    <color name="dividing_line_dark_blue">#012e5b</color>
-    <color name="circle_light_gray">#959595</color>
-
     <!-- Shadow Colors-->
     <color name="tabBarBackgroundColor">#ffffff</color>
     <color name="tabBarShadowColor">#ff000000</color>
     <color name="fontGreyTransparent">#ffD9D9D9</color>
-
-    <array name="dot_colors">
-        <item>#293777</item>
-        <item>#4CA5D7</item>
-        <item>#F29A59</item>
-        <item>#CD5124</item>
-    </array>
-
-    <color name="pfm_chart_limit_color">#CC5124</color>
-    <color name="pfm_chart_saving_goal_color">#F29A59</color>
-    <color name="pfm_chart_spent_live_line_color">#48E866</color>
-    <color name="pfm_chart_spent_fill_color">#47E665</color>
-    <color name="pfm_chart_x_axis_text_color">#293877</color>
-    <color name="pfm_blue_action_color">#2755CC</color>
-    <color name="text_title">#212121</color>
-    <color name="font_blue_alpha">#26293877</color>
 </resources>

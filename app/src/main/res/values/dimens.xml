@@ -7,11 +7,16 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!--    Fonts-->
-    <dimen name="title_h1">18sp</dimen>
-    <dimen name="title_h2">12sp</dimen>
-    <dimen name="title_h3">10sp</dimen>
+    <dimen name="title_h1">30sp</dimen>
+    <dimen name="title_h2">24sp</dimen>
+    <dimen name="title_h3">20sp</dimen>
+    <dimen name="title_h4">18sp</dimen>
+    <dimen name="title_h5">12sp</dimen>
+    <dimen name="title_h6">10sp</dimen>
 
     <!--    Margin-->
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_half">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_normal_24">24dp</dimen>
     <dimen name="margin_normal_32">32dp</dimen>

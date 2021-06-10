@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/workoutTimeLayout"
-        style="@style/ButtonBlueOval"
+        android:id="@+id/timeButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginHorizontal="@dimen/margin_half"
+        android:layout_marginVertical="@dimen/margin_half"
+        style="@style/ButtonGrayOval">
 
-    <LinearLayout
-        android:id="@+id/switchNotificationsLayout"
-        style="@style/ButtonBlueOval"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/workoutTimeLayout">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_half"
+            android:src="@drawable/ic_pick_time" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notifications" />
-
-        <Switch
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="@dimen/title_h4"
+                    android:text="@string/set_notification_time" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title_h5"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginHorizontal="@dimen/margin_normal"
+        android:textColor="@color/blue_dark"
+        android:text="@string/workouts_title"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/workoutListRecyclerView"
         android:name="bg.standingdeskworkout.standingdeskworkout.ui.workoutRoutine.WorkoutRoutineFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_small"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/switchNotificationsLayout"
         tools:context=".ui.workoutRoutine.WorkoutRoutineFragment"
         tools:layout_editor_absoluteX="38dp"
-        tools:listitem="@layout/list_item_workout_exercise" />
+        tools:listitem="@layout/list_item_workout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
